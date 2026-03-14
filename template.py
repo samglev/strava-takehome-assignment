@@ -1,7 +1,9 @@
 import argparse
 import sys
+import json
 
 def main():
+    #provided starter code for parsing command-line arguments
     parser = argparse.ArgumentParser(description="Process index data.")
     parser.add_argument("--endpoint", type=str, default="",
                         help="Logging endpoint")
@@ -15,7 +17,7 @@ def main():
 
     if args.debug:
         try:
-            data = get_data_from_file("indexes.json")
+            data = get_data_from_file("data/indexes.json")
         except Exception as err:
             sys.exit("Error reading data from file. Error: " + str(err))
     else:
@@ -24,9 +26,25 @@ def main():
         except Exception as err:
             sys.exit("Error reading data from API endpoint. Error: " + str(err))
 
-    print_largest_indexes(data)
-    print_most_shards(data)
-    print_least_balanced(data)
+    # print_largest_indexes(data)
+    # print_most_shards(data)
+    # print_least_balanced(data)
+
+#TODO: implement print_largest_indexes
+#TODO: implement print_most_shards
+#TODO: implement print_least_balanced
+#TODO: implement get_data_from_server
+#   TODO: add add'l command-line arg for start date?
+#           default to today, but have option of incl. start/end date?
+
+def get_data_from_file(filename):
+    """
+    returns dictionary containing data from JSON file
+    """
+    with open(filename) as f:
+        data_dict = json.load(f)
+    return data_dict
+
 
 if __name__ == '__main__':
     main()
