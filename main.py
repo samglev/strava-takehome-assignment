@@ -1,8 +1,20 @@
+"""
+A simple program to parse and analyze logging data obtained from an API query
+
+Author: Sam Lev
+3/16/26
+"""
+
 import argparse
 import sys
 import json
+import analyze
+import fetcher
 
 def main():
+    fetcher.test()
+    return
+
     #provided starter code for parsing command-line arguments
     parser = argparse.ArgumentParser(description="Process index data.")
     parser.add_argument("--endpoint", type=str, default="",
@@ -25,21 +37,19 @@ def main():
             data = get_data_from_server(args.endpoint, args.days)
         except Exception as err:
             sys.exit("Error reading data from API endpoint. Error: " + str(err))
+    data = analyze.pre_process(data)
+    analyze.print_largest_indexes(data)
+    analyze.print_most_shards(data)
+    analyze.print_least_balanced(data)
 
-    # print_largest_indexes(data)
-    # print_most_shards(data)
-    # print_least_balanced(data)
 
-#TODO: implement print_largest_indexes
-#TODO: implement print_most_shards
-#TODO: implement print_least_balanced
 #TODO: implement get_data_from_server
 #   TODO: add add'l command-line arg for start date?
 #           default to today, but have option of incl. start/end date?
 
 def get_data_from_file(filename):
     """
-    returns dictionary containing data from JSON file
+    returns a list of dictionaries containing data from JSON file
     """
     with open(filename) as f:
         data_dict = json.load(f)
