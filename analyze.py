@@ -51,10 +51,8 @@ def print_least_balanced(data):
 
 def pre_process(data):
     """
-    Pre-processes list of dictionaries by adding a field for size-to-shard ratio,
-    converting size to GB, and converting all numerical data to numerical types
-
-    returns a new list
+    Adds a field for size-to-shard ratio, converts size to GB, and converts all
+    numerical data to numerical types. returns a new list
     """
     processed_data = []
     for item in data:
