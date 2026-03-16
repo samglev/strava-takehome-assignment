@@ -34,15 +34,11 @@ def main():
             data = fetcher.get_data_from_server(args.endpoint, args.days)
         except Exception as err:
             sys.exit("Error reading data from API endpoint. Error: " + str(err))
-            
+
     data = analyze.pre_process(data)
     analyze.print_largest_indexes(data)
     analyze.print_most_shards(data)
     analyze.print_least_balanced(data)
-
-
-#   TODO: add add'l command-line arg for start date?
-#           default to today, but have option of incl. start/end date?
 
 def get_data_from_file(filename):
     """
